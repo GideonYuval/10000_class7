@@ -1,0 +1,82 @@
+﻿
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace _10000_class7
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+        }
+    }
+
+    public class Contract
+    {
+        private string name;
+        private int days;
+        private int kilo;
+
+        public Contract(string name, int days, int kilo)
+        {
+            this.name = name;
+            this.days = days;
+            this.kilo = kilo;
+        }
+        
+        public int GetDays() { return days; }
+        public int GetKilo() { return kilo; }
+    }
+
+    public class Vehicle
+    {
+        private string id;
+        private Contract contract;
+
+        public Vehicle (string name, int days, int kilo, string id)
+        {
+            contract = new Contract(name, days, kilo);
+            this.id = id;
+        }
+
+        public virtual double Payment()
+        {
+            return 60 * contract.GetDays() + 2 * contract.GetKilo();
+        }
+    }
+
+    public class Car : Vehicle
+    {
+        private int seats;
+
+        public Car(string name, int days, int kilo, string id, int seats) : base (name, days, kilo, id)
+        {
+            this.seats = seats;
+        }
+
+
+    }
+
+    public class Truck : Vehicle
+    {
+        private int max;
+
+        public override double Payment ()
+        {
+            return base.Payment() + 500;
+        }
+    }
+
+    public class Motorcycle : Vehicle
+    {
+        private bool offRoad;
+
+        public override double Payment()
+        {
+            return base.Payment() / 2;
+        }
+    }
+}
